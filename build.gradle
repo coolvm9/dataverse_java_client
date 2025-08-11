@@ -10,14 +10,18 @@ repositories {
 }
 
 dependencies {
+    // Use available Microsoft CRM SDK dependencies
     implementation 'org.apache.httpcomponents.client5:httpclient5:5.3.1'
-
+    
     // MSAL4J for Azure AD authentication
     implementation 'com.microsoft.azure:msal4j:1.14.3'
 
-    // Jackson for JSON parsing
+    // Jackson for JSON processing
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.2'
 
+    // Additional dependencies for XML processing (needed for CRM SDK style operations)
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'
+    implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.1'
 
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
