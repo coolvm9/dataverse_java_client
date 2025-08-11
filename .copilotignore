@@ -1,0 +1,25 @@
+# Environment variables and secrets
+.env
+.env.*
+
+# Configuration files with sensitive data
+application-local.properties
+application-dev.properties
+application-prod.properties
+application-*.yml
+application-*.yaml
+
+# Logs that might contain sensitive information
+*.log
+logs/
+
+# Database files
+*.db
+*.sqlite
+
+# Private keys and certificates
+*.key
+*.pem
+*.p12
+*.jks
+*.keystore
