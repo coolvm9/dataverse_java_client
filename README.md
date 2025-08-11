@@ -104,6 +104,40 @@ The main method includes example usage:
 
 Or from IntelliJ: Run the `DataverseClient` main class.
 
+## Corporate Proxy Configuration
+
+If running behind a corporate proxy, configure JVM proxy settings:
+
+### IntelliJ IDEA
+1. Go to `Run` → `Edit Configurations`
+2. Select your configuration
+3. Click `Modify options` → Check `Add VM options`
+4. In VM options field, add:
+```
+-Dhttp.proxyHost=proxy.myorg.com -Dhttp.proxyPort=8080 -Dhttps.proxyHost=proxy.myorg.com -Dhttps.proxyPort=8080
+```
+
+### Gradle Command Line
+```bash
+./gradlew run -Dhttp.proxyHost=proxy.myorg.com -Dhttp.proxyPort=8080 -Dhttps.proxyHost=proxy.myorg.com -Dhttps.proxyPort=8080
+```
+
+### If Proxy Requires Authentication
+Add to VM options:
+```
+-Dhttp.proxyUser=your-username -Dhttp.proxyPassword=your-password -Dhttps.proxyUser=your-username -Dhttps.proxyPassword=your-password
+```
+
+### Alternative: System Proxy Detection
+```
+-Dcom.sun.net.useSystemProxies=true
+```
+
+### Troubleshooting Proxy Issues
+- Test without proxy (mobile hotspot) to confirm proxy is the issue
+- Check corporate firewall allows access to `login.microsoftonline.com`
+- For SSL certificate issues, contact your IT department about certificate trust
+
 ## Security Notes
 
 - **Never commit sensitive credentials to source control**
