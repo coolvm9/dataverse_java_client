@@ -141,14 +141,23 @@ public class DataverseClient {
         return saved;
     }
 
+    private static String resolveProperty(Properties props, String key) {
+        String value = props.getProperty(key);
+        if (value != null && value.startsWith("${") && value.endsWith("}")) {
+            String envVar = value.substring(2, value.length() - 1);
+            return System.getenv(envVar);
+        }
+        return value;
+    }
+
     public static void main(String[] args) throws Exception {
         Properties props = new Properties();
         props.load(DataverseClient.class.getResourceAsStream("/application.properties"));
         
-        String TENANT = System.getenv("AZ_TENANT_ID");
-        String CLIENT = System.getenv("AZ_CLIENT_ID");
-        String SECRET = System.getenv("AZ_CLIENT_SECRET");
-        String ORGURL = System.getenv("DV_ORG_URL");
+        String TENANT = resolveProperty(props, "azure.tenant.id");
+        String CLIENT = resolveProperty(props, "azure.client.id");
+        String SECRET = resolveProperty(props, "azure.client.secret");
+        String ORGURL = resolveProperty(props, "dataverse.org.url");
 
         DataverseClient dv = new DataverseClient(TENANT, CLIENT, SECRET, ORGURL);
 
